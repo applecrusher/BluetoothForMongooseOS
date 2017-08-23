@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.launchServerButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,
-                ServerActivity.class)));
+
         binding.launchClientButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,
                 ClientActivity.class)));
     }
