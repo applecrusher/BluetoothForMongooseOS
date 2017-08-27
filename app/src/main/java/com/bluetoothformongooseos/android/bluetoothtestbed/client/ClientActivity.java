@@ -25,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +126,22 @@ public class ClientActivity extends AppCompatActivity implements OnItemSelectedL
         keySpinner.setAdapter(keyDataAdapter);
         saveSpinner.setAdapter(saveDataAdapter);
 
+    }
+
+    public void customKeySelected(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox)v;
+        View keyValueText = findViewById(R.id.custom_key_text);
+        View messageKeyEditView = findViewById(R.id.message_key_edit);
+        //now you want to show the custom view
+        if(checkBox.isChecked()){
+            keyValueText.setVisibility(View.VISIBLE);
+            messageKeyEditView.setVisibility(View.GONE);
+        }
+        else{
+            keyValueText.setVisibility(View.GONE);
+            messageKeyEditView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -264,7 +282,14 @@ public class ClientActivity extends AppCompatActivity implements OnItemSelectedL
             }
             String message = "";
             if(i == 0){
-                message = mBinding.messageKeyEdit.getSelectedItem().toString();
+                CheckBox customKeyCheckBox = (CheckBox) findViewById(R.id.custom_key_checkbox);
+                if(customKeyCheckBox.isChecked()){
+                    message = ((EditText) findViewById(R.id.custom_key_text)).getText().toString();
+                    log("Custom message is " + message);
+                }
+                else {
+                    message = mBinding.messageKeyEdit.getSelectedItem().toString();
+                }
             }
             else if(i ==1){
                 message = mBinding.messageValueEdit.getText().toString();
@@ -299,7 +324,8 @@ public class ClientActivity extends AppCompatActivity implements OnItemSelectedL
                 log("Failed to write data");
             }
             try{
-                Thread.sleep(1000);
+                //you need to wait to write each characteristic, I am not sure exactly what a good wait time is, but it causes issues without it
+                Thread.sleep(250);
             }
             catch(InterruptedException e){
 

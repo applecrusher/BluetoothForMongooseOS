@@ -78,6 +78,22 @@
             android:text="@string/messages"
             android:textAlignment="center"/>
 
+        <CheckBox
+            android:id="@+id/custom_key_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="customKeySelected"
+            android:text="Custom Key" />
+
+        <EditText
+            android:id="@+id/custom_key_text"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Custom Key"
+            android:visibility="gone" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="203dp"

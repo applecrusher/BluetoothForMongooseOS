@@ -17,6 +17,16 @@ public class GattServerViewModel extends BaseObservable {
         if (mBluetoothDevice == null) {
             return "";
         }
-        return mBluetoothDevice.getAddress();
+
+        String name = mBluetoothDevice.getName();
+
+        if(name == null){
+            name = "None";
+        }
+        else if(name.equals("")){
+            name = "None";
+        }
+
+        return name + "/n" + mBluetoothDevice.getAddress();
     }
 }
